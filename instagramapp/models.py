@@ -48,4 +48,8 @@ class Image (models.Model):
         self.delete()    
 class Meta:
         ordering = ['post_date']        
-  
+
+class Comments(models.Model):
+    image = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
+    commentator = models.ForeignKey(User, blank=True)
+    comment= models.TextField()
