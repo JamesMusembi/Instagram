@@ -32,7 +32,7 @@ class Image (models.Model):
     name = models.CharField(max_length =40)
     caption=  HTMLField()
     comments= models.CharField(max_length =100)
-    profile = models.ForeignKey(Profile,null = True)
+    # profile = models.ForeignKey(Profile,null = True,on_delete='CASCADE')
     username = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     post_date=models.DateTimeField(auto_now_add=True)
     def __str__(self):
