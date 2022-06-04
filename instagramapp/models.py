@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from tinymce.models import HTMLField
+from django.utils import timezone
 
 
 # Create your models here.
@@ -36,14 +37,3 @@ class Image (models.Model):
     post_date=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.name
-   class Image (models.Model):
-    image = models.ImageField(upload_to = 'images/')
-    name = models.CharField(max_length =40)
-    caption=  HTMLField()
-    comments= models.CharField(max_length =100)
-    profile = models.ForeignKey(Profile,null = True)
-    username = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
-    post_date=models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return self.name
-   
