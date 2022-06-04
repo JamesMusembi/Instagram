@@ -37,12 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_boostrap5'
-    
-    
-    
-    #own
     'instagramapp',
+    # 'django_boostrap5',
+    
+    
+    
+    
+    
 ]
 
 MIDDLEWARE = [
