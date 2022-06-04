@@ -31,7 +31,7 @@ class Image (models.Model):
     image = models.ImageField(upload_to = 'images/')
     name = models.CharField(max_length =40)
     caption=  HTMLField()
-    comments= models.CharField(max_length =100)
+    comment= models.CharField(max_length =100)
     # profile = models.ForeignKey(Profile,null = True,on_delete='CASCADE')
     username = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     post_date=models.DateTimeField(auto_now_add=True)
@@ -53,3 +53,17 @@ class Meta:
 #     image = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
 #     commentator = models.ForeignKey(User, blank=True)
 #     comment= models.TextField()
+
+class Comment(models.Model):
+    class Meta:
+        db_table = "comments"     
+    image = models.ForeignKey(Image ,on_delete=models.CASCADE, related_name='comments')
+    comment= models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField('Date of comment', default=timezone.now)
+    active = models.BooleanField(default=False)
+    def __str__(self):
+        return self.image
+ 
+    class Meta:
+        ordering = ["-pk"]
