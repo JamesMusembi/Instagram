@@ -56,7 +56,7 @@ class Meta:
 
 class Comment(models.Model):
     class Meta:
-        db_table = "comments"     
+        db_table = "comment"     
     image = models.ForeignKey(Image ,on_delete=models.CASCADE, related_name='comments')
     comment= models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
