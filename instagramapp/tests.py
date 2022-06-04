@@ -36,3 +36,40 @@ class ImageTestClass(TestCase):
         update = Image.objects.filter(id = image.id).update(name = 'cake')
         updated = Image.objects.filter(name = 'cake').first()
         self.assertNotEqual(image.name, updated.name) 
+        
+# Profile model test  
+      
+class ProfileTestClass(TestCase):        
+    
+        # Set up method
+    def setUp(self):
+        self.image= Profile(profile = 'img.jpg', bio ='image')
+        # self.images= Profile(profile1 = 'piza1.jpg', bio ='pizza')
+        
+        # Testing  instance
+    def test_instance(self):
+        self.assertTrue(isinstance(self.image,Profile))     
+        
+        # Testing Save Method of Profile model
+    def test_save_method(self):
+        self.image.save_profile()
+        images = Profile.objects.all()
+        self.assertTrue(len(images) > 0)         
+        
+    # Testing  delete method of Profile model     
+    def test_delete(self):
+        self.image= Profile(profile = 'img.jpg', bio ='image')
+        self.image.save_profile()
+        image = Profile.objects.filter(profile = 'img.jpg').first()
+        delete = Profile.objects.filter(id = image.id).delete()
+        images = Profile.objects.all()
+        self.assertTrue(len(images) == 0)            
+        
+    # Testing  update method of Profile model    
+    def test_update(self):
+        self.image.save_profile()
+        image = Profile.objects.filter(profile = 'img.jpg').first()
+        update = Profile.objects.filter(id = image.id).update(profile = 'cake.jpg')
+        updated = Profile.objects.filter(profile = 'cake.jpg').first()
+        self.assertNotEqual(image.profile, updated.profile)  
+        
