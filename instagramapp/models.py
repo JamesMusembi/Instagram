@@ -19,4 +19,10 @@ class Profile(models.Model):
         self.update()
 
     def delete_profile(self):
-        self.delete() 
+        self.delete()
+        
+    @classmethod
+    def search_user(cls,search_term):
+        profiles = cls.objects.filter(username__username__icontains=search_term)
+        return profiles 
+    
