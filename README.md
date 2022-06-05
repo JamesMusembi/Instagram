@@ -46,3 +46,6 @@ Have a virtual environment
 ```
 $ python3.9 -m venv --without-pip virtual
 
+### Create the Database
+    - psql
+    - CREATE DATABASE instagram;
