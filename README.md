@@ -22,3 +22,12 @@ Features:
 ## Getting Started
 
 These instructions are instruction on getting my application.
+
+### Prerequisites
+
+The following things are needed so as install the application and how to install them
+
+```
+Python-3.9.13
+pip 3
+```
