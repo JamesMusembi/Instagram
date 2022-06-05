@@ -60,5 +60,9 @@ Create .env file and paste paste the following filling where appropriate:
     DEBUG = True
     
 ## Run initial Migration
-    python3.9 manage.py makemigrations gallery
+    python3.9 manage.py makemigrations instagram
     python3.9 manage.py migrate
+
+## Run the app
+    python3.9 manage.py runserver
+    Open terminal on localhost:8000
