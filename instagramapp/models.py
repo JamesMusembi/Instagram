@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
@@ -5,11 +6,11 @@ from django.utils import timezone
 
 
 # Create your models here.
+        
 class Profile(models.Model):
-    profile = models.ImageField(upload_to = 'images/',null=True)
+    profile = models.ImageField(upload_to = 'images/',null=True,default='images/67.jpg')
     bio = models.CharField(max_length =60)
     username = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
-    
     def __str__(self):
         return self.bio
 
@@ -20,24 +21,25 @@ class Profile(models.Model):
         self.update()
 
     def delete_profile(self):
-        self.delete()
-        
+        self.delete()         
+
     @classmethod
     def search_user(cls,search_term):
         profiles = cls.objects.filter(username__username__icontains=search_term)
-        return profiles 
+        return profiles   
     
 class Image (models.Model):
-    image = models.ImageField(upload_to = 'images/')
+    image = models.ImageField(upload_to = 'images/',null=True,default='images/66.jpg')
     name = models.CharField(max_length =40)
     caption=  HTMLField()
-    comment= models.CharField(max_length =100)
-    # profile = models.ForeignKey(Profile,null = True,on_delete='CASCADE')
+    comments= models.CharField(max_length =100)
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE,default='True')
     username = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     post_date=models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return self.name
-
+    
     def save_image(self):
         self.save()
 
@@ -48,22 +50,20 @@ class Image (models.Model):
         self.delete()    
 class Meta:
         ordering = ['post_date']        
-
+        
 # class Comments(models.Model):
 #     image = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
 #     commentator = models.ForeignKey(User, blank=True)
 #     comment= models.TextField()
-
-class Comment(models.Model):
-    class Meta:
-        db_table = "comment"     
-    image = models.ForeignKey(Image ,on_delete=models.CASCADE, related_name='comments')
-    comment= models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    pub_date = models.DateTimeField('Date of comment', default=timezone.now)
-    active = models.BooleanField(default=False)
+        
+class Comments(models.Model):
+    title=models.CharField(max_length=100)
+    comments=models.TextField()
+    
     def __str__(self):
-        return self.image
- 
-    class Meta:
-        ordering = ["-pk"]
+        return self.title
+
+
+
+    def __str__(self):
+        return self.likes

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Image, Profile
+from .models import Image, Profile,Comments
 
 class NewImageForm(forms.ModelForm):
     class Meta:
