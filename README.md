@@ -18,3 +18,7 @@ Features:
     - Heroku
     - Postgresql
     - Django, Django Rest Framework
+
+## Getting Started
+
+These instructions are instruction on getting my application.
