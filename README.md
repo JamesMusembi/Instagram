@@ -10,3 +10,11 @@ Features:
 - Users can like and comment on a picture
 - A user can click on a photo to view the photo's details
 - A user's photos will appear on another's timeline once that user follows them 
+
+#### Technologies used
+    - Python 3.9
+    - HTML
+    - Bootstrap 5
+    - Heroku
+    - Postgresql
+    - Django, Django Rest Framework
