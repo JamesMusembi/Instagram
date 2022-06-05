@@ -1,6 +1,6 @@
 # Instagram
 
-This project was created by Alice Githui.
+This project was created by James Musembi.
 
 ## Description
 An Instagram like application, with an authentication system where users can register to create their accounts and has a login feature once they register their account. 
