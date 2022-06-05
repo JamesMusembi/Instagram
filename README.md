@@ -49,3 +49,12 @@ $ python3.9 -m venv --without-pip virtual
 ### Create the Database
     - psql
     - CREATE DATABASE instagram;
+    
+##  .env file
+Create .env file and paste paste the following filling where appropriate:
+
+    SECRET_KEY = '<Secret_key>'
+    DBNAME = 'instagram'
+    USER = '<Username>'
+    PASSWORD = '<password>'
+    DEBUG = True
