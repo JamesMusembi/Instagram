@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'registration',
     'instagramapp',
     'django_bootstrap5',
     'tinymce',
@@ -69,7 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                 'django.template.context_processors.media',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -87,6 +88,8 @@ DATABASES = {
         'NAME': 'instagram',
         'USER': 'moringa',
         'PASSWORD': 'james',
+        'HOST': 'localhost',
+         'PORT': '5432',
     }
 }
 

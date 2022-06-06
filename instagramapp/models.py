@@ -1,4 +1,5 @@
 from email.policy import default
+# from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
@@ -32,7 +33,7 @@ class Image (models.Model):
     image = models.ImageField(upload_to = 'images/',null=True,default='images/66.jpg')
     name = models.CharField(max_length =40)
     caption=  HTMLField()
-    comments= models.CharField(max_length =100)
+    comment= models.CharField(max_length =100)
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE,default='True')
     username = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     post_date=models.DateTimeField(auto_now_add=True)
@@ -51,19 +52,8 @@ class Image (models.Model):
 class Meta:
         ordering = ['post_date']        
         
-# class Comments(models.Model):
-#     image = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
-#     commentator = models.ForeignKey(User, blank=True)
-#     comment= models.TextField()
-        
 class Comments(models.Model):
-    title=models.CharField(max_length=100)
-    comments=models.TextField()
-    
-    def __str__(self):
-        return self.title
-
-
-
-    def __str__(self):
-        return self.likes
+    image = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE)
+    commentator = models.ForeignKey(User, blank=True, on_delete=models.CASCADE)
+    comment= models.TextField()
+        
