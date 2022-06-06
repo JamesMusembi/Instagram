@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'instagramproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'instagram',
+        'NAME': 'instagram2',
         'USER': 'moringa',
         'PASSWORD': 'james',
         'HOST': 'localhost',

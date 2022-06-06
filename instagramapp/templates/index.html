@@ -1,7 +1,7 @@
 {%extends 'all-news/base.html'%}
 
 {% block content %}
-{{block.super}}
+
 
 <div class="container"> <br> <br>
   <div class="row">
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  {% for image in images %}
+ 
 
   <div class="row">
     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
@@ -27,19 +27,19 @@
         <button class="btn btn-sm btn-link" type="submit"><img class="" src="https://image.flaticon.com/icons/svg/25/25663.svg" alt="" width="24px"></button>
         
         <br> 
-        <p> <strong>{{image.username}}</strong> {% autoescape on %} {{image.caption| safe}} {% endautoescape %} </p>
+        <p> <strong>{{image.username}}</strong>  {{image.caption}}  </p>
       </div>
     </div>
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
   </div>
 
-  {% empty %}
+  
   <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <h2 class="text-center">No Post Yet</h2>
     </div>
   </div>
-  {% endfor %} <br>
+   <br>
 
 </div>
 

@@ -7,7 +7,7 @@ import datetime as dt
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def welcome(request):
-    images = Image.objects.all().order_by('post_date')
+    images = Image.objects.all()
     profile = Profile.objects.all()
     return render(request, 'index.html', {'images': images}, {'profile': profile})
 
