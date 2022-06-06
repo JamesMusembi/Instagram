@@ -5,11 +5,10 @@ from .forms import NewImageForm,NewProfileForm
 import datetime as dt
 
 # Create your views here.
-@login_required(login_url='/accounts/login/')
+
 def welcome(request):
-    images = Image.objects.all()
-    profile = Profile.objects.all()
-    return render(request, 'index.html', {'images': images}, {'profile': profile})
+    images=Image.objects.all()
+    return render(request, 'index.html',{'images':images})
 
 def search_results(request):
 
