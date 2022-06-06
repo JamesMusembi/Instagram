@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'registration',
     'instagramapp',
-    
+    'bootstrap4',
     'tinymce',
 ]
 
