@@ -55,7 +55,7 @@ def profile(request):
 
     else:
         form = NewProfileForm()
-    return render(request, 'profile.html', {"form": form},  {'images': images}) 
+    return render(request, 'profile.html',  {'images': images}) 
 
 @login_required(login_url='/accounts/login/')
 def myaccount(request):

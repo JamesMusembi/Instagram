@@ -1,5 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
@@ -12,7 +20,7 @@
     </div>
 
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <form class="form-inline my-2 my-lg-0" action="">
+      <form class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" name = "profile" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
       </form>
@@ -29,10 +37,10 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li>
-            <a href="">Create Post</a>
+            <a href="{%url 'new_post'%}">Create Post</a>
           </li>
           <li>
-            <a href="">Add Profile</a>
+            <a href="{%url 'profile' %}">Add Profile</a>
           </li>
           <li>
             <a href="/accounts/password/change">Change Password</a>
@@ -52,3 +60,6 @@
     <!-- </div> -->
   </nav>
   <!-- </div> -->
+</body>
+
+</html>

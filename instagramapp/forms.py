@@ -12,4 +12,11 @@ class NewImageForm(forms.ModelForm):
 class NewProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = []        
+        exclude = [] 
+        fields = ('username', 'bio','profile')       
+        
+        
+# class ImageForm(forms.ModelForm):
+#     class Meta:
+#         model = Image
+#         fields = ('image', 'caption')
