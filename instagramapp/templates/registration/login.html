@@ -1,45 +1,97 @@
-{%extends "registration/base.html"%}
-{% load crispy_forms_tags %}
-{% load bootstrap4 %}
+{% extends 'base.html' %}
 {% block content %}
-<div class="container">
-        <br> <br> <br>
-  <div class="row"> 
-    <!-- Empty div -->
-    <div class="col-md-4">
-        <img src="https://techthelead.com/wp-content/uploads/2017/11/instagram-stories-old.jpg" alt="" height="385" width="300">
-    </div>
-    <div class="col-md-5">
-      {% if form.errors %}
-        <p> Password or Username is incorrect </p>
-      {% endif %}
-      <div class="card">
-
-        <div class="card-header">
-          <h3 class="text-center">Sign In</h3>
-        </div>
-        <div class="card-body">
-
-          <form  action="/accounts/login/" method="post">
-            {% csrf_token %}
-            {{ form|crispy}}
-
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Login">
+<div class="container h-100 mt-5">
+    <div class="row my-5">
+        <div class="col-md-10 offset-md-1">
+           <div class="row">
+            <div class="col-md-6 d-flex ms-3">
+                <img src="/static/images/screen2.png" class="bg-dark img-screen" alt="">
+                <img src="/static/images/screen2.png" class="bg-dark mt-4 img-screen screenimg" alt="">
+    
             </div>
+            <div class="col-md-5">
+                <div class="h-100">
+                    <div class="user_card card">
+                        <div class="text-center py-4">
+            
+            
+                            <h3 id="form-title">Instagram</h3>
+                        </div>
+                        <div>
+                            {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                            <div class="p-2 alert alert-danger">
+                                {{message}}
+                            </div>
+                            {% else %}
+                            <div class="p-2 alert alert-{{message.tags}}">
+                                {{message}}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div>
 
-            <input type="hidden" name="next" value="{{next}}">
-
-          </form>
-
+                            <div class="d-flex justify-content-center form_container">
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                            
+                                        </div>
+                                        <input type="text" name="username" placeholder="Username..." class="form-control">
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-append">
+                                            
+                                        </div>
+                                            <input type="password" name="password" placeholder="Password..." class="form-control" >
+                                    </div>
+                
+                                        <div class="d-flex justify-content-center mt-3 login_container">
+                                             <input class="btn login_btn" type="submit" value="Login">
+                                           </div>
+                                </form>
+                                
+                            </div>
+                            <div class="text-center ">
+                                <p class="text-center text-secondary">OR</p>
+                                <i class="fa-brands fa-facebook-square text-primary"></i>
+                                <span class="text-primary">Log in with Facebook</span>
+                                <div class="text-primary">
+                                    <a href="#">Forgot password?</a>
+                                </div>
+                            </div>
+            
+                        </div>
+                       
+                        {% for message in messages %}
+                        <p class="text-center" id="messages">{{message}}</p>
+                        {% endfor %}
+                
+                       
+                    </div>
+                    <div class="card mt-5">
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-center links">
+                                Don't have an account? <a href="{% url 'register' %}" class="ml-2">Sign Up</a>
+                            </div>
+                    
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <p class="me-5">Get the app.</p>
+                        <div class="d-flex">
+                            <img src="/static/images/playstore.png" class="me-2" width="50%" alt="">
+                            <img src="/static/images/googleapp.png" class="" width="50%" alt="">
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+           </div>
         </div>
-        <p style="margin-left: 15px"> Don't you have an account  <a class="btn btn-primary btn-sm" style="margin: 5px" href="/accounts/register/"> Sign Up </a> </p>
-      </div>
-
     </div>
-    <!-- empty div -->
-    <div class="col-md-3"></div>
-  </div>
+    
 </div>
-
 {% endblock %}
