@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.dispatch import receiver
 from tinymce.models import HTMLField
+from django.db.models.signals import post_save
 
 # Create your models here.
         
@@ -12,18 +14,32 @@ class Profile(models.Model):
     email_phone=models.CharField(max_length=100,blank=True,null=True)
     followers=models.ManyToManyField(User,related_name='followers')
     following=models.ManyToManyField(User,related_name='following')
-    def __str__(self):
-        return self.bio
-
+    
     def save_profile(self):
-        self.save()    
-        
-    def update_profile(self):
-        self.update()
+        self.save()
 
     def delete_profile(self):
-        self.delete()         
+        self.delete()
 
+    def update_profile(self,id,profile):
+        updated_profile=Profile.objects.filter(id=id).update(profile)
+        return updated_profile
+
+    def __str__(self):
+        return self.user.username
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+            instance.profile.save()
+
+        post_save.connect(Profile, sender=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        Profile.objects.get_or_create(user=instance)
+        instance.profile.save()
      
     
 class Image(models.Model):

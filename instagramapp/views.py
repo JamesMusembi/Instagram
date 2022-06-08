@@ -24,9 +24,9 @@ def index(request):
     count=0
     c_users=[]
     for user in users:
-        # if user in request.user.profile.followers.all() or user in request.user.profile.following.all():
+        if user in request.user.profile.followers.all() or user in request.user.profile.following.all():
             pass
-        # else:
+        else:
             if count <= 10:
                 if user == request.user:
                     pass
@@ -99,7 +99,7 @@ def loginPage(request):
         print('user',user)
         if user is not None:
             login(request,user)
-            return redirect('welcome')
+            return redirect('index')
         else:
             messages.error(request,'User with this credentials not found')
 
