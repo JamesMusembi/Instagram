@@ -19,7 +19,7 @@ from django.views.generic import TemplateView, ListView
 
 def welcome(request):
     images=Image.objects.all()
-    return render(request, 'index.html',{'images':images})
+    return render(request, 'index.html')
 
 def search_results(request):
 

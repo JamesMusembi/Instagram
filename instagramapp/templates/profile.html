@@ -1,39 +1,79 @@
-
-{% load bootstrap4 %} {% load static %}
-{% load crispy_forms_tags %}
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Profile</title>
-  {{form.media}}
-
-  {% block styles %} {% bootstrap_css %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
-
-</head>
-
-<body>
-
-  <div class="row">
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="border-style: inset;"> <br>
-      <form action="{%url 'profile'%}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        {{ form|crispy}}
-        <input type="submit" class="btn btn-success btn-lg" value="Post">
-      </form> <br>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row my-4 mx-5">
+       
+        <div class="col-md-5 m-3">
+           
+                <div class="row">
+                    <div class="col-md-6">
+                        
+                        <div>
+                            <p>{{request.user.profile.bio}}</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            {% if image.profile.profile.profile_img %}
+                            <img src="/static/images/user.webp" width="80px" height="80px" class=" rounded-circle" alt="">
+                            
+                            {% else %}
+                            <img src="{{request.user.profile.profile_img.url}}" class=" rounded-circle" width="80px" height="80px" alt="">
+                            {% endif %}
+                            <h3 class="ms-2">{{request.user.username}} 
+                            </h3>
+                        </div>
+                    </div>
+                   <div class="col-md-4 p-0">
+                    <a href="{% url 'edit' %}"><div class="btn border-secondary ">
+                        Edit profile
+                    </div></a>
+                   </div>
+                    <div class="col-md-2">
+                        <img src="" width="40px" alt="">
+                    </div>
+                </div>
+                <div class="my-3 row ms-auto follow">
+                    <div class="col-md-4">
+                        <p>{{request.user.image_set.count}} posts</p>
+                    </div>
+                   <div class="col-md-4">
+                    <p> <span class="me-2">
+                        {{request.user.profile.followers.count}}
+                    </span> Followers</p>
+                   </div>
+                   <div class="col-md-4">
+                    <p>{{request.user.profile.following.count}} Following</p>
+                   </div>
+                </div>
+        </div>
     </div>
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-  </div>
-  {% block scripts %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  {% bootstrap_javascript %} {% endblock %}
-
-</body>
-
-</html>
+    <hr>
+    <div class="row ms-4">
+        <div class="w-100 d-flex justify-content-center">
+            <h6 class=" mx-5 ">
+                POST
+            </h6>
+            <h6 class=" mx-4">
+                SAVED
+            </h6>
+            <h6 class="mx-4 ">
+                TAGGED
+            </h6>
+           </div>
+        <div class="col-md-6">
+           <div class="row">
+               {% for post in request.user.image_set.all %}
+               <div class="col-md-4">
+                   <div class="post-holder">
+                       <img src="{{post.image.url}}" width="100%" alt="">
+                   </div>
+               </div>
+               {% endfor %}
+           </div>
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center p-5">
+            <h5>Start capturing and sharing your moments.</h5>
+            <p>Get the app to share your first photo or video.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
