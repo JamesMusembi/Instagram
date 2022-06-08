@@ -1,38 +1,71 @@
-{% load bootstrap4 %} {% load static %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
-<!DOCTYPE html>
-<html>
+{%  block content %}
+<div class="container ">
+    <div class="row mx-5 mt-4">
+        <div class="col-md-3 card">
+            <div class="my-3">
+                <p>Edit profile</p>
+            </div>
+            <div class="my-3">
+                <p>Change Password</p>
+            </div>
+            <div class="my-3">
+                <p>Apps and Websites</p>
+            </div>
+            <div class="my-3">
+                <p>Email Notifications</p>
+            </div>
+            <div class="my-3">
+                <p>push Notifications</p>
+            </div>
+            <div class="my-3">
+                <p>Manage Contacts</p>
+            </div>
+            <div class="my-3">
+                <p>Privacy and Security</p>
+            </div>
+            <div class="my-3">
+                <p>Login and Activity</p>
+            </div>
+            <div class="my-3">
+                <p>Email From Instagram</p>
+            </div>
+            <div class="my-3">
+                <p>Help</p>
+            </div>
+            <div class="my-3">
+                <a href="#" class="text-center">Switch to Professional <br> Account</a>
+            </div>
+        </div>
+        <div class="col-md-9 card">
+            <div class="row mx-3">
+               
+            </div>
+           <div class="row">
+            <form action="#" method="POST" class="form" id="pos" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ prof_form|crispy}}
+               
+                   
+              
+               
+               <div class="d-flex justify-content-center">
+                   <button type="submit" class="btn btn-outline-info ">submit</button>
+               </div>
+               <div class="row my-2">
+                    <div class="col-md-2 mx-3">
+                        <p> Similar Account Suggestions </p>
+                    </div>
+                    <div class="col-md-6">
+                       <input type="checkbox">
+                    
+                    </div>
+               </div>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Profile</title>
-  {{form.media}}
-
-  {% block styles %} {% bootstrap_css %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
-
-</head>
-
-<body>
-
-  <div class="row">
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="border-style: inset;"> <br>
-      <form action="{%url 'edit_profile'%}" method="post" enctype="multipart/form-data">
-        {%csrf_token%}
-
-        {{ form|crispy}}
-        <input type="submit" class="btn btn-success btn-lg" value="Post">
-      </form> <br>
+            </form>
+           </div>
+        </div>
     </div>
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-  </div>
-  {% block scripts %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  {% bootstrap_javascript %} {% endblock %}
-
-</body>
-
-</html>
+</div>
+{% endblock %}
