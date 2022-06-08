@@ -1,13 +1,131 @@
-h1
-{
-  color: #34495E ;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #FAFAFA;
+}
+.navbar{
+  display: flex;
+  justify-content: space-around;
+}
+.navborder{
+  border-bottom: 1px solid #d5cfcf;
+}
+.navbar form input{
+  background-color: #EFEFEF;
+  border: none;
+}
+.card-comment{
+  border-bottom: 1px solid #d5cfcf;
+}
+.add-comment input{
+  border: none;
+}
+.follow a{
+  text-decoration: none;
+  color: #139bf6;
 }
 
-#page{
-  border-style: inset;
-}
 
-#boder{
-  border: 2px solid red;
+.user_card {
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: auto;
+  background-color: #FFFFFF;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
  
+}
+
+.form_container {
+  margin-top: 20px;
+}
+
+
+.login_btn {
+  width: 100%;
+  background: #B2DFFC;
+  color: white;
+}
+.login_btn:focus {
+  box-shadow: none;
+  outline: 0px;
+}
+.login_container {
+  padding: 0 2rem;
+}
+.input-group-text {
+  background: #f7ba5b;
+  color: white;
+  border: 0;
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+.input_user,
+.input_pass:focus {
+  box-shadow: none;
+  outline: 0px;
+}
+
+
+#messages{
+  background-color: grey;
+  color: #fff;
+  padding: 10px;
+  margin-top: 10px;
+}
+.screenimg{
+  z-index: 10px;
+  margin-left: -80px;
+
+}
+.img-screen{
+ 
+  border: 4px solid black;
+  border-radius: 25px;
+}
+a{
+  text-decoration: none;
+  color: #139bf6;
+  font-weight: 800;
+}
+.custom-file-input{
+  width: 100%;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  content: 'Select some photos';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 2px dotted #9999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  /* -webkit-user-select: none; */
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+.border-none{
+    border: none !important;
+    outline: none !important;
 }
