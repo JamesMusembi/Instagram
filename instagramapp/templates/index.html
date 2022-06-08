@@ -1,46 +1,130 @@
 {% extends 'base.html' %}
-
 {% block content %}
+<div class="container my-5">         
+    <div class="row mx-5">
+        <div class="col-md-6 ms-5">
+            <div class="card mb-4 d-flex p-3 flex-row">
+                {% if user.profile.profile_img %}
+                    <img src="{{user.profile.profile_img.url}}" width="80px" height="80px" class=" rounded-circle mx-3" alt="">
+                    {% else %}
+                    <img src="/static/images/user.webp" width="40px" height="40px" class=" rounded-circle" alt="">
+                    {% endif %}
+                <img src="/static/images/dalmas.png" width="80px" class="img-fluid  rounded-circle" alt="{{image.profile_img}}">
+                
+            </div>
+            {% for image in images %}
+            
+            <div class="card mb-3 ">   
+                <div class="d-flex p-2 p-md-3 align-items-center">
+                    {% if image.profile.profile.profile_img %}
+                    <img src="{{image.profile.profile.profile_img.url}}" width="40px" height="40px" class=" rounded-circle" alt="">
+                    {% else %}
+                    <img src="/static/images/user.webp" width="40px" height="40px" class=" rounded-circle" alt="">
+                    {% endif %}
+                <p class=" m-0 p-0 ms-2">{{image.profile.username}}</p> 
+                </div>       
+               
+                <img src="{{image.image.url}}" class="img-fluid" alt=" {{image.image}}">
+                
+                <div class="card-lower p-2 p-md-3 w-100 d-flex ">
+                    <div class="d-flex align-items-center">
+                        {% if request.user in image.likes.all %}
+                        <form action="{% url 'addremovelike' image_id=image.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn shadow-none outline-none">
+                                <i class="fa-solid fa-heart fa-2x"></i>
+                            </button>
+                        </form>
+                        
+                        {% else %}
+                        <form action="{% url 'addremovelike' image_id=image.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn shadow-none outline-none">
+                                <i class="fa-regular fa-heart fa-2x"></i>
+                            </button>
+                        </form>
+                       
+                        {% endif %}
+                        
+                       
+                        <i class="fa-regular fa-comment fa-2x"></i>
+                        <i class="fa-regular fa-paper-plane fa-2x"></i>
 
-
-<div class="container"> <br> <br>
-  <div class="row">
-    <div class="col-md-5"></div>
-    <div class="col-md-4"></div>
-    <div class="col-md-3"> <br>
-      <a href="" style="text-decoration: none; color: black;"> <img src="https://avatarfiles.alphacoders.com/115/115265.png" alt="profile"
-          height="50px" width="50px" style="border-radius: 50%;"> <strong> View your Profile </strong> </a> 
+                    </div>
+                    
+                    <div class=" ms-auto ">
+                        <i class="fa-regular fa-bookmark fa-2x"></i>
+                    </div>
+                </div>
+                <div class="card-comment p-2 p-md-3">
+                    <p class="p-0 m-0"><strong>{{image.likes.count}} likes</strong></p>
+                   <div class="text-secondary">
+                    <p class="p-0 m-0">{{image.comment_set.count}} view comment</p>
+                    <p class="p-0 m-0 text-uppercase">{{image.created_at | timesince  }}</p>
+                   </div>
+                </div>
+                <div class="d-flex align-items-center add-comment p-3">
+                    <span style="width:10%"><i class="fa-regular fa-face-smile"></i></span>
+                   <form method="POST" action="{%  url 'addcomment' image_id=image.id %}" style="width:90%" >
+                    {% csrf_token %}
+                       <div class="d-flex ">
+                        <div class="input-group w-75">
+                            <input type="text" name="comment" class="w-100" placeholder="Add a comment">
+                           </div>
+                           <div class="input-group w-25">
+                               <button class="btn btn-light ms-auto text-secondary">Post</button>
+                           </div>
+                       </div>
+                   </form>
+                </div>
+                
+                    
+            </div>
+            {% endfor %}
+        </div>        
+        <div class="col-md-5">
+            <div class="d-flex">
+                {% if image.profile.profile.profile_img %}
+                <img src="/static/images/user.webp" width="80px" height="80px" class=" rounded-circle" alt="">
+                {% else %}
+                
+                <img src="{{request.user.profile.profile_img.url}}" width="80px" height="80px" class=" rounded-circle" alt="">
+                {% endif %}
+                <h6 class="m-3">{{request.user.username}} <br>
+                <span class="text-secondary">{{request.user.profile.fullname}}</span></h6>
+                <div class="my-3 ms-auto follow">
+                    <a href="">Switch</a>
+                </div>
+            </div>
+            <div class="d-flex ">
+                <h5>Suggestions For You</h5>
+                <p class="ms-auto">See All</p>
+            </div>
+            {% for user in users %}
+            <div class="d-flex my-2">
+                    {% if user.profile.profile_img %}
+                    <img src="{{user.profile.profile_img.url}}" width="40px" height="40px" class=" rounded-circle" alt="">
+                    {% else %}
+                    <img src="/static/images/user.webp" width="40px" height="40px" class=" rounded-circle" alt="">
+                    {% endif %}
+                <h6 class="m-1">{{user.username}} <br>
+                <span class="text-secondary">Suggested</span></h6> 
+                <div class="my-1 ms-auto follow">
+                    <form action="{% url 'addremovefollow' user_id=user.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn shadow-none outline-none text-primary">
+                            Follow
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            {% if users|length == 0 %}
+            <p>No Suggestions today</p>
+            {% endif %}
+        </div>
     </div>
-  </div>
-
- 
-
-  <div class="row">
-    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
-    <div style="border-style: ridge;">
-      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7"> <br>
-        <img src="https://avatarfiles.alphacoders.com/115/115265.png" alt="profile" height="50px" width="50px"
-          style="border-radius: 50%;"> <strong> {{image.username}} </strong><br> <br>
-        <img src="{{image.image.url}}" class="img-responsive" alt="Image" height="300px" width="646px">
-        <br>
-        <button class="btn btn-sm btn-link" type="submit"><img class="" src="https://image.flaticon.com/icons/svg/2087/2087965.svg" alt="" width="24px"></button>
-        <button class="btn btn-sm btn-link" type="submit"><img class="" src="https://image.flaticon.com/icons/svg/25/25663.svg" alt="" width="24px"></button>
-        
-        <br> 
-        <p> <strong>{{image.username}}</strong>  {{image.caption}}  </p>
-      </div>
-    </div>
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-  </div>
-
-  
-  <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <h2 class="text-center">No Post Yet</h2>
-    </div>
-  </div>
-   <br>
-
+    
 </div>
 
 {% endblock %}

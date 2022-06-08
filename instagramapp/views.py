@@ -54,19 +54,19 @@ def new_post(request):
 def profile(request):
     current_user = request.user
     profile = Profile.objects.filter(id=current_user.id)
-    images = Image.objects.filter(username= current_user)
+    # images = Image.objects.filter(username= current_user)
     # images = Image.objects.all()
     if request.method == 'POST':
         # # form = NewProfileForm(request.POST, request.FILES)
         # if form.is_valid():
         #     profile = form.save(commit=False)
-            profile.username = current_user
-            profile.save()
+            # profile.username = current_user
+            # profile.save()
         # return redirect('myaccount')
 
     # else:
         # form = NewProfileForm()
-    return render(request, 'profile.html',  {'images': images}) 
+     return render(request, 'profile.html',  ) 
 
 @login_required(login_url='/accounts/login/')
 def myaccount(request):
