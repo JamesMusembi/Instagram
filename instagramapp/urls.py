@@ -2,17 +2,20 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from . import views
+from .views import SearchResultsView
 
 urlpatterns=[
-    path('',views.welcome,name = 'welcome'),
-    path('search/', views.search_results, name='search_results'),
-    # path('new/image/', views.new_post, name='new_post'),
-    path('new/profile/', views.profile, name='profile'),
-    path('myaccount/',views.myaccount,name = 'myaccount'),
-    path('new/edit_profile/', views.edit_profile, name='edit_profile'),
+    path('',views.index,name = 'index'),
+    path('addpost/',views.addPost,name='addpost'),
+    path('profile/',views.profile,name='profile'),
+    path('edit/',views.editProfile,name='edit'),
     path('register/',views.register,name='register'),
     path('login/',views.loginPage,name='login'),
     path('logout/',views.logoutUser,name='logout'),
+    path('addcomment/<str:image_id>/',views.addComment,name='addcomment'),
+    path('addremovelike/<str:image_id>/',views.addremovelike,name='addremovelike'),
+    path('addremovefollow/<str:user_id>/',views.addremovefollow,name='addremovefollow'),
+    path("search/", SearchResultsView.as_view(), name="search_results"),
     
 
 
