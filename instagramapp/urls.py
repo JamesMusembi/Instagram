@@ -5,7 +5,7 @@ from . import views
 from .views import SearchResultsView
 
 urlpatterns=[
-    path('',views.index,name = 'index'),
+    path('',views.index,name='index'),
     path('addpost/',views.addPost,name='addpost'),
     path('profile/',views.profile,name='profile'),
     path('edit/',views.editProfile,name='edit'),
