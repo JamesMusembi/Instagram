@@ -17,22 +17,49 @@ from .forms import ProfileForm
 
 # Create your views here.
 
-def welcome(request):
-    images=Image.objects.all()
-    return render(request, 'index.html')
+@login_required(login_url='login')
+def index(request):
+    image=Image.objects.all()
+    users=User.objects.all()
+    count=0
+    c_users=[]
+    for user in users:
+        if user in request.user.profile.followers.all() or user in request.user.profile.following.all():
+            pass
+        else:
+            if count <= 10:
+                if user == request.user:
+                    pass
+                else:
+                    c_users.append(user)
+    return render(request,'index.html',{'images':image,'users':c_users})
 
-def search_results(request):
 
-    if 'profile' in request.GET and request.GET["profile"]:
-        search_term = request.GET.get("profile")
-        searched_profile = Profile.search_user(search_term)
-        message = f"{search_term}"
+@login_required(login_url='login')
+def addPost(request): 
+    if request.method=='POST':
+        image=request.FILES.get('photo')
+        caption=request.POST.get('caption')
+        img=Image(img_name=image.name,image=image,image_caption=caption,profile=request.user)
+        img.save_image()
+        return redirect('index')
+        
+    return render(request,'addimage.html')
 
-        return render(request, 'all-news/search.html',{"message":message,"profiles": searched_profile})
 
-    else:
-        message = "You haven't searched for any term"
-        return render(request, 'all-news/search.html',{"message":message})
+@login_required(login_url='login')
+def profile(request):
+    user=User.objects.all()
+    # current_user=request.GET.get('user')
+    # logged_in_user=request.user.username
+    # user_followers=len(FollowersCount.objects.filter(user=current_user))
+    # print("number",user_followers)
+    # user_following=len(FollowersCount.objects.filter(follower=current_user))
+    # print(user_following)
+    return render(request,'profile.html',{'user':user})
+
+
+
     
 # @login_required(login_url='/accounts/login/')
 # def new_post(request):
