@@ -9,7 +9,7 @@ from django.db.models.signals import post_save
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     fullname=models.CharField(max_length=100,blank=True,null=True)
-    profile_img=models.ImageField(upload_to='image/',default='static/images/isaac.png',null=True)
+    profile_img=models.ImageField(upload_to='image/',default='static/images/nature15.jpg',null=True)
     bio=models.TextField(blank=True,null=True)
     email_phone=models.CharField(max_length=100,blank=True,null=True)
     followers=models.ManyToManyField(User,related_name='followers')
